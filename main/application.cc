@@ -381,7 +381,8 @@ void Application::Start() {
             SetDeviceState(kDeviceStateIdle);
         });
     });
-    protocol_->OnIncomingJson([this, display](const cJSON* root) {
+    //SetDeviceState(kDeviceStateListening);
+    /*protocol_->OnIncomingJson([this, display](const cJSON* root) {
         // Parse JSON data
         auto type = cJSON_GetObjectItem(root, "type");
         if (strcmp(type->valuestring, "tts") == 0) {
@@ -439,11 +440,11 @@ void Application::Start() {
                 }
             }
         }
-    });
+    });*/
     protocol_->Start();
 
     // Check for new firmware version or get the MQTT broker address
-    ota_.SetCheckVersionUrl(CONFIG_OTA_VERSION_URL);
+    /*ota_.SetCheckVersionUrl(CONFIG_OTA_VERSION_URL);
     ota_.SetHeader("Device-Id", SystemInfo::GetMacAddress().c_str());
     ota_.SetHeader("Client-Id", board.GetUuid());
     ota_.SetHeader("X-Language", Lang::CODE);
@@ -452,7 +453,7 @@ void Application::Start() {
         Application* app = (Application*)arg;
         app->CheckNewVersion();
         vTaskDelete(NULL);
-    }, "check_new_version", 4096 * 2, this, 1, nullptr);
+    }, "check_new_version", 4096 * 2, this, 1, nullptr);*/
 
 
 #if CONFIG_USE_AUDIO_PROCESSING
